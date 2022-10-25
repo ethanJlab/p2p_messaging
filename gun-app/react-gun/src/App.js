@@ -1,4 +1,4 @@
-import { useEffect, useState, useReducer } from 'react';
+import {useState, useReducer } from 'react';
 import Gun from 'gun';
 
 // initialize gun
