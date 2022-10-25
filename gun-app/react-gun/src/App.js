@@ -80,9 +80,10 @@ export default function App() {
       {
         state.messages.map(message => (
           <div key={message.createdAt}>
+            <h2>--------------------------</h2>
             <h2>Message: {message.message}</h2>
             <h3>From: {message.name}</h3>
-            <p>Date: {message.createdAt}</p>            
+            <p>Date: {message.createdAt}</p>        
           </div>
         ))
       }
