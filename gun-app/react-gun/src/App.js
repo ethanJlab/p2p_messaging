@@ -1,4 +1,4 @@
-import { useEffect, useState, useReducer } from 'react';
+import {useState, useReducer } from 'react';
 import Gun from 'gun';
 
 // initialize gun
@@ -6,7 +6,7 @@ import Gun from 'gun';
 
 const gun = Gun({
     peers: [
-        'http://localhost:3030/gun'
+        'http://localhost:3040/gun'
     ]
 });
 
@@ -34,9 +34,9 @@ export default function App() {
   // when the app loads, fetch the current messages and load them into the state
   // this also subcribes to new data as it changes an updates and the local state
 
-  useEffect(() => {
+  useState(() => {
     const messages = gun.get('messages');
-    messages.map().on(m => {
+    messages.map().once(m => {
       dispatch({
         name: m.name,
         message: m.message,
@@ -54,6 +54,7 @@ export default function App() {
       createdAt: Date.now()
     });
     setForm({ name: '', message: '' });
+    window.location.replace("http://localhost:3000/");
   }
 
   // update the form state when the user types in the form fields
@@ -79,8 +80,9 @@ export default function App() {
       {
         state.messages.map(message => (
           <div key={message.createdAt}>
-            <h2>{message.message}</h2>
+            <h2>Message: {message.message}</h2>
             <h3>From: {message.name}</h3>
+            <p>Date: {message.createdAt}</p>            
           </div>
         ))
       }
